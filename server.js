@@ -46,7 +46,7 @@ app.post("/message", function(request, response) {
   console.log(name + " : " + message);
 
   //Looks good, let the client know
-  response.json(200, {message: "Message received"});
+  //response.json(200, {message: "Message received"});
 
 
 });
