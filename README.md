@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/louisnorthmore/monitor-server.png?label=ready&title=Ready)](https://waffle.io/louisnorthmore/monitor-server)
 # monitor-server
 Simple Monitor Server in node.js designed to be used to view realtime logs or messages from anything!
 
