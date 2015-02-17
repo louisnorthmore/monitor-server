@@ -48,7 +48,7 @@ app.post("/message", function(request, response) {
   var timestamp = Math.round(+new Date()/1000); // unix timestamp
   var message = request.body.message;
   var name = request.body.name;
-  var id = new Date();
+  var id = timestamp;
   var type = request.body.type;
 
   if(!type) {
@@ -57,7 +57,7 @@ app.post("/message", function(request, response) {
 
   io.sockets.emit("message", {id: id, type: type, message: message, name: name, timestamp: timestamp});
 
-  console.log(timestamp + " : " + type + " : " + name + " : " + message);
+  console.log("id:" + id + " : " + timestamp + " : " + type + " : " + name + " : " + message);
 
   //Looks good, let the client know
   response.json(200, {message: "Message received"});
