@@ -1,4 +1,4 @@
-/* 
+/*
   Module dependencies:
 
   - Express
@@ -19,7 +19,7 @@ var express = require("express")
 //Server's IP address
 app.set("ipaddr", "");
 
-//Server's port number 
+//Server's port number
 app.set("port", 8080);
 
 //Tells server to support JSON requests
@@ -37,16 +37,23 @@ response.sendfile('index.html');
 //POST method to create a chat message
 app.post("/message", function(request, response) {
 
-  //The request body expects a param named "message"
+  //build our data
+  var timestamp = Math.round(+new Date()/1000); // unix timestamp
   var message = request.body.message;
   var name = request.body.name;
+  var id = new Date();
+  var type = request.body.type;
 
-  io.sockets.emit("message", {message: message, name: name});
+  if(!type) {
+    type = 'default';
+  }
 
-  console.log(name + " : " + message);
+  io.sockets.emit("message", {id: id, type: type, message: message, name: name, timestamp: timestamp});
+
+  console.log(timestamp + " : " + type + " : " + name + " : " + message);
 
   //Looks good, let the client know
-  //response.json(200, {message: "Message received"});
+  response.json(200, {message: "Message received"});
 
 
 });
@@ -54,7 +61,7 @@ app.post("/message", function(request, response) {
 /* Socket.IO events */
 io.on("connection", function(socket){
 
- 
+
 
 });
 

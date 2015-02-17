@@ -25,7 +25,7 @@
   <body>
     <ul id="messages"></ul>
 
-<!--    
+<!--
 <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
@@ -34,13 +34,28 @@
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
+
   var socket = io();
-  
+
   socket.on('message', function (data) {
     var message = data.message;
     var name = data.name;
-    $('#messages').prepend('<p class="message"><span class="name">' + name + '</span> <span class="message">' + message + '</span></p>');
+    var timestamp = data.timestamp;
+    var type = data.type;
+    $('#messages').prepend('<p class="message ' + type + '"> <span class="timestamp">' + timestamp + '</span> <span class="name">' + name + '</span> <span class="message">' + message + '</span></p>');
+
+    function nice_timestamp(unix_timestamp){
+      var a = new Date(unix_timestamp)*1000;
+      var hour = a.getHours();
+      var min = a.getMinutes();
+      var sec = a.getSeconds();
+      var time = hour + ':' + min + ':' + sec ;
+      return time;
+    }
+
   });
+
+
 
 </script>
 
