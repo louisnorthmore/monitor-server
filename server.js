@@ -14,6 +14,13 @@ var express = require("express")
   , io = require("socket.io").listen(http)
   , bodyParser = require("body-parser");
 
+var fs = require("fs");
+var file = "monitor.db";
+var exists = fs.existsSync(file);
+
+var sqlite3 = require("sqlite3").verbose();
+var db = new sqlite3.Database(file);
+
 /* Server config */
 
 //Server's IP address
